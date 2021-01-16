@@ -2,7 +2,7 @@ var async = require("async");
 var fs = require("fs");
 var pg = require("pg");
 
-// Connect to the "modern-puma-267.defaultdb" database.
+// Connect to the "modern-puma-267.defaultdb" database with Kevin's credentials
 var config = {
   user: "kevin",
   password: "password1234567890",
@@ -33,20 +33,20 @@ pool.connect(function (err, client, done) {
       function (next) {
         // Create the 'sponsors' table.
         client.query(
-          "CREATE TABLE IF NOT EXISTS sponsors (id INT PRIMARY KEY, balance INT);",
+          "CREATE TABLE IF NOT EXISTS sponsors (id INT PRIMARY KEY, fname varchar, lname varchar, org varchar);",
           next
         );
       },
       function (results, next) {
         // Insert two rows into the 'accounts' table.
         client.query(
-          "INSERT INTO sponsors (id, balance) VALUES (1, 1000), (2, 250);",
+          "INSERT INTO sponsors (*) VALUES (1, 'Edmund', 'Lui', 'HTN'), (2, 'Adams', 'Liu', 'HTN'), (3, 'Brandon', 'Hayes', 'HTN');",
           next
         );
       },
       function (results, next) {
         // Print out account balances.
-        client.query("SELECT id, balance FROM sponsors;", next);
+        client.query("SELECT * FROM sponsors;", next);
       },
     ],
     function (err, results) {
@@ -58,7 +58,7 @@ pool.connect(function (err, client, done) {
         finish();
       }
 
-      console.log("Initial balances:");
+      console.log("Initial rows:");
       results.rows.forEach(function (row) {
         console.log(row);
       });
