@@ -24,38 +24,66 @@ var config = {
 //- delete student
 //- update sponsor click count (add field/count to both student and sponsor count)
 //- toggle show sponsor data (boolean)
-//-
+//- update foodCard data
 
 // Create a pool.
 var pool = new pg.Pool(config);
 
-function createSponsor() {
+function insertSponsor(id, fname, lname, org) {
   pool.connect(function (err, client, done) {
-    // Close communication with the database and exit.
-    var finish = function () {
-      done();
-      process.exit();
-    };
     //checks for errors
     if (err) {
       console.error("could not connect to cockroachdb", err);
-      finish();
+      done();
+    }
+
+    var q =
+      "INSERT INTO sponsors (id, fname, lname, org) VALUES (" +
+      id +
+      ",'" +
+      fname +
+      "','" +
+      lname +
+      "','" +
+      org +
+      "')";
+
+    console.log(q);
+    client.query(q);
+    console.log("YOOYOYO");
+    done();
+  });
+}
+
+function updateSponsor(id, fname, lname, org) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
     }
     async.waterfall(
       [
-        // function (next) {
-        //   // Create the 'sponsors' table.
-        //   client.query(
-        //     "CREATE TABLE IF NOT EXISTS sponsors (id INT PRIMARY KEY, fname varchar, lname varchar, org varchar);",
-        //     next
-        //   );
-        // },
+        function (next) {
+          // Create the 'sponsors' table.
+          client.query(
+            "UPDATE sponsors SET fname = '" + fname + "' WHERE id=" + id,
+            next
+          );
+        },
         function (results, next) {
           // Insert 3 rows into the 'sponsors' table.
           client.query(
-            "INSERT INTO sponsors (id, fname, lname, org) VALUES (51 , 'Edmund', 'Lui', 'HTN'), (52, 'Adams', 'Liu', 'HTN'), (81, 'Brandon', 'Hayes', 'HTN');"
+            "UPDATE sponsors SET lname = '" + lname + "' WHERE id=" + id,
+            next
           );
-          console.log("YOOYOYO");
+        },
+        function (results, next) {
+          // Print out sponsors list.
+          client.query(
+            "UPDATE sponsors SET org = '" + org + "' WHERE id=" + id,
+            next
+          );
         },
       ],
       function (err, results) {
@@ -64,17 +92,108 @@ function createSponsor() {
             "Error inserting into and selecting from sponsors: ",
             err
           );
-          console.log("OYOYOYOY");
-          finish();
+          done();
         }
-        finish();
+        done();
       }
     );
   });
-  // Your code goes here.
-  // For more information, see the 'node-postgres' docs:
-  // https://node-postgres.com
+}
+function deleteSponsor(id) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
+    }
+
+    var q = "delete from sponsors where id=" + id;
+
+    console.log(q);
+    client.query(q);
+
+    done();
+  });
 }
 
-var result = createSponsor();
-console.log(result);
+function insertStudent(id, name, country) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
+    }
+
+    var q =
+      "INSERT INTO student (id, name, country) VALUES (" +
+      id +
+      ",'" +
+      name +
+      "','" +
+      country +
+      "')";
+
+    console.log(q);
+    client.query(q);
+    console.log("YOOYOYO");
+    done();
+  });
+}
+
+function updateStudent(id, name, country) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
+    }
+    async.waterfall(
+      [
+        function (next) {
+          // Create the 'students' table.
+          client.query(
+            "UPDATE students SET name = '" + name + "' WHERE id=" + id,
+            next
+          );
+        },
+        function (results, next) {
+          // Insert rows into the 'students' table.
+          client.query(
+            "UPDATE students SET country = '" + country + "' WHERE id=" + id,
+            next
+          );
+        },
+      ],
+      function (err, results) {
+        if (err) {
+          console.error(
+            "Error inserting into and selecting from students: ",
+            err
+          );
+          done();
+        }
+        done();
+      }
+    );
+  });
+}
+function deleteStudent(id) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
+    }
+
+    var q = "delete from students where id=" + id;
+
+    console.log(q);
+    client.query(q);
+
+    done();
+  });
+}
+
+deleteSponsor(156);
+
+// console.log(result);
