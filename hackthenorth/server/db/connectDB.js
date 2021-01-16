@@ -23,7 +23,7 @@ pool.connect(function (err, client, done) {
     done();
     process.exit();
   };
-
+  //checks for errors
   if (err) {
     console.error("could not connect to cockroachdb", err);
     finish();
@@ -38,14 +38,14 @@ pool.connect(function (err, client, done) {
         );
       },
       function (results, next) {
-        // Insert two rows into the 'accounts' table.
+        // Insert 3 rows into the 'sponsors' table.
         client.query(
-          "INSERT INTO sponsors (*) VALUES (1, 'Edmund', 'Lui', 'HTN'), (2, 'Adams', 'Liu', 'HTN'), (3, 'Brandon', 'Hayes', 'HTN');",
+          "INSERT INTO sponsors (id, fname, lname, org) VALUES (12, 'Edmund', 'Lui', 'HTN'), (22, 'Adams', 'Liu', 'HTN'), (33, 'Brandon', 'Hayes', 'HTN');",
           next
         );
       },
       function (results, next) {
-        // Print out account balances.
+        // Print out sponsors list.
         client.query("SELECT * FROM sponsors;", next);
       },
     ],
