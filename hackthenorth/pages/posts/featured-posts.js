@@ -13,6 +13,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Nav from '../../components/navbar';
+import styles from '../../styles/Home.module.css'
+import Head from 'next/head'
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -63,7 +65,7 @@ const featuredPosts = [
     title: 'Featured Food',
     date: 'Jan 16',
     description:
-      'This needs to be made more dynamic, but this is a featured food.'
+      'This needs to be made more dynamic.'
   },
   {
     title: 'Featured Meal',
@@ -78,7 +80,13 @@ const FeaturedPosts = () => {
 
   return (
     <>
-      <Nav> </Nav>
+      <Head>
+            <title>ShareFood</title>
+            <link rel="icon" href="/bake.png" />
+      </Head>
+      <div className={styles.nav}>
+            <Nav> </Nav> 
+      </div>
       <CssBaseline />
       <Container maxWidth="lg">
         <Toolbar className={classes.toolbar}>

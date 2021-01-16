@@ -10,8 +10,8 @@ export default function Home() {
         <div className={styles.nav}>
             <Nav> </Nav> 
         </div>
-        <div className={styles.container}>
         
+        <div className={styles.container}>
         <Head>
             <title>ShareFood</title>
             <link rel="icon" href="/bake.png" />
