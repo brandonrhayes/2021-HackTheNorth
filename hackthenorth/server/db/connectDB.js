@@ -19,6 +19,7 @@ var config = {
 //- InsertSponsor
 //- update sponsor data
 //- delete sponsor data
+//- retrieve sponsor data
 //- insert student
 //- update student
 //- delete student
@@ -38,7 +39,7 @@ function insertSponsor(id, fname, lname, org) {
     }
 
     var q =
-      "INSERT INTO sponsors (id, fname, lname, org) VALUES (" +
+      "INSERT INTO sponsors (sponsorid, fname, lname, org) VALUES (" +
       id +
       ",'" +
       fname +
@@ -67,21 +68,21 @@ function updateSponsor(id, fname, lname, org) {
         function (next) {
           // Create the 'sponsors' table.
           client.query(
-            "UPDATE sponsors SET fname = '" + fname + "' WHERE id=" + id,
+            "UPDATE sponsors SET fname = '" + fname + "' WHERE sponsorid=" + id,
             next
           );
         },
         function (results, next) {
           // Insert 3 rows into the 'sponsors' table.
           client.query(
-            "UPDATE sponsors SET lname = '" + lname + "' WHERE id=" + id,
+            "UPDATE sponsors SET lname = '" + lname + "' WHERE sponsorid=" + id,
             next
           );
         },
         function (results, next) {
           // Print out sponsors list.
           client.query(
-            "UPDATE sponsors SET org = '" + org + "' WHERE id=" + id,
+            "UPDATE sponsors SET org = '" + org + "' WHERE sponsorid=" + id,
             next
           );
         },
@@ -107,12 +108,30 @@ function deleteSponsor(id) {
       done();
     }
 
-    var q = "delete from sponsors where id=" + id;
+    var q = "delete from sponsors where sponsorid=" + id;
 
     console.log(q);
     client.query(q);
 
     done();
+  });
+}
+
+function retrieveSponsor(id) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
+    }
+
+    var q = "select fname, lname, org from sponsors where sponsorid=" + id;
+
+    console.log(q);
+    client.query(q);
+
+    done();
+    return()
   });
 }
 
@@ -125,7 +144,7 @@ function insertStudent(id, name, country) {
     }
 
     var q =
-      "INSERT INTO student (id, name, country) VALUES (" +
+      "INSERT INTO student (studentid, name, country) VALUES (" +
       id +
       ",'" +
       name +
@@ -152,14 +171,17 @@ function updateStudent(id, name, country) {
         function (next) {
           // Create the 'students' table.
           client.query(
-            "UPDATE students SET name = '" + name + "' WHERE id=" + id,
+            "UPDATE students SET name = '" + name + "' WHERE studentid=" + id,
             next
           );
         },
         function (results, next) {
           // Insert rows into the 'students' table.
           client.query(
-            "UPDATE students SET country = '" + country + "' WHERE id=" + id,
+            "UPDATE students SET country = '" +
+              country +
+              "' WHERE studentid=" +
+              id,
             next
           );
         },
@@ -185,7 +207,7 @@ function deleteStudent(id) {
       done();
     }
 
-    var q = "delete from students where id=" + id;
+    var q = "delete from students where studentid=" + id;
 
     console.log(q);
     client.query(q);
