@@ -7,6 +7,12 @@
   align-items: center;
 }
 
+.nav {
+  min-height: 100vh;
+  padding: 0 0rem;
+  display: inline;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
