@@ -5,11 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Hidden from "@material-ui/core/Hidden";
 import Link from "@material-ui/core/Link";
 import Container from "@material-ui/core/Container";
 import Nav from "../../components/navbar";
@@ -48,30 +43,40 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0,
     },
   },
-  card: {
-    display: "flex",
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 160,
-  },
 }));
 
 const featuredPosts = [
   {
-    title: "Featured Food",
-    date: "Jan 16",
+    title: "Shrimp Curry",
+    date: "Jan 16, 7:30PM ",
+    address: "99 Main St.",
     dish_img_url: "/images/dish1.jpg",
     description:
-      "This needs to be made more dynamic, but this is a featured food.",
+      "I'm trying a new recipe and would love to get feedback on how it tastes! :)",
   },
   {
-    title: "Featured Meal",
-    date: "Jan 15",
+    title: "Double Patty Burger",
+    date: "Jan 17, 5:30PM ",
+    address: "101 Waterloo Ave.",
     dish_img_url: "/images/dish2.jpg",
-    description: "A delicious homemade meal.",
+    description:
+      "Accidently bought too many burgers, need to make them all before the go bad! ",
+  },
+  {
+    title: "Shrimp Salad",
+    date: "Jan 17, 12:30PM ",
+    address: "101 Waterloo Ave.",
+    dish_img_url: "/images/dish3.jpg",
+    description:
+      "Accidently bought too many burgers, need to make them all before the go bad! ",
+  },
+  {
+    title: "Mom's Spaghetti",
+    date: "Jan 17, 7:00PM ",
+    address: "101 Waterloo Ave.",
+    dish_img_url: "/images/dish4.jpg",
+    description:
+      "Accidently bought too many burgers, need to make them all before the go bad! ",
   },
 ];
 

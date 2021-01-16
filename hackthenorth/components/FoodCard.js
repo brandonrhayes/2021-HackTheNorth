@@ -3,52 +3,36 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
+import Button from "@material-ui/core/Button";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  mainFeaturedPost: {
-    position: "relative",
-    backgroundColor: theme.palette.grey[800],
-    color: theme.palette.common.white,
-    marginBottom: theme.spacing(4),
-    backgroundImage: "url(https://source.unsplash.com/featured/?{dish})",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-  },
-  overlay: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,.7)",
-  },
-  mainFeaturedPostContent: {
-    position: "relative",
-    padding: theme.spacing(3),
-    [theme.breakpoints.up("md")]: {
-      padding: theme.spacing(6),
-      paddingRight: 0,
-    },
+  button: {
+    color: "white",
+    backgroundColor: "limegreen",
   },
   card: {
+    boxShadow: "0 20px 25px 0 rgba(0,0,0,0.2)",
     display: "flex",
   },
   cardDetails: {
     flex: 1,
   },
   cardMedia: {
-    width: 160,
+    width: 180,
+  },
+  cardDate: {
+    paddingBottom: "1rem",
+  },
+  cardClaimBox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 }));
 
@@ -60,18 +44,33 @@ const FoodCard = ({ post }) => {
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
-              <Typography component="h2" variant="h5">
+              <Typography
+                className={classes.cardTitle}
+                component="h2"
+                variant="h5"
+              >
                 {post.title}
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
-                {post.date}
+              <Typography
+                className={classes.cardDate}
+                variant="subtitle2"
+                color="textSecondary"
+              >
+                {post.date} @ {post.address}
               </Typography>
               <Typography variant="subtitle1" paragraph>
                 {post.description}
               </Typography>
-              <Typography variant="subtitle1" color="primary">
-                Continue to order...
-              </Typography>
+              <Box className={classes.cardClaimBox}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  startIcon={<CheckCircleIcon />}
+                >
+                  CLAIM
+                </Button>
+                <Typography>2/4</Typography>
+              </Box>
             </CardContent>
           </div>
 
