@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -13,12 +13,20 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles((theme) => ({
   button: {
+    color: "gray",
+    "&:hover": {
+      color: "white",
+      backgroundColor: "limegreen",
+    },
+  },
+  claimedButton: {
     color: "white",
     backgroundColor: "limegreen",
   },
   card: {
     boxShadow: "0 20px 25px 0 rgba(0,0,0,0.2)",
     display: "flex",
+    borderRadius: "20px",
   },
   cardDetails: {
     flex: 1,
@@ -38,6 +46,11 @@ const useStyles = makeStyles((theme) => ({
 
 const FoodCard = ({ post }) => {
   const classes = useStyles();
+  const [isClaimed, setIsClaimed] = useState(false);
+
+  const handleClaim = () => {
+    setIsClaimed((isClaimed) => !isClaimed);
+  };
   return (
     <Grid item key={post.title} xs={12} md={6}>
       <CardActionArea component="a" href="#">
@@ -51,25 +64,42 @@ const FoodCard = ({ post }) => {
               >
                 {post.title}
               </Typography>
+              {/* <Typography variant="subtitle2" color="textSecondary">
+                {post.sponsor_name}
+              </Typography> */}
               <Typography
                 className={classes.cardDate}
                 variant="subtitle2"
                 color="textSecondary"
               >
-                {post.date} @ {post.address}
+                {post.date} • {post.address}
               </Typography>
               <Typography variant="subtitle1" paragraph>
                 {post.description}
               </Typography>
               <Box className={classes.cardClaimBox}>
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  startIcon={<CheckCircleIcon />}
-                >
-                  CLAIM
-                </Button>
-                <Typography>2/4</Typography>
+                {isClaimed ? (
+                  <Button
+                    onClick={handleClaim}
+                    variant="contained"
+                    className={classes.claimedButton}
+                    startIcon={<CheckCircleIcon />}
+                  >
+                    CLAIMED
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleClaim}
+                    variant="contained"
+                    className={classes.button}
+                    startIcon={<CheckCircleIcon />}
+                  >
+                    CLAIM
+                  </Button>
+                )}
+                <Typography>
+                  {post.claimed}/{post.quantity}
+                </Typography>
               </Box>
             </CardContent>
           </div>
