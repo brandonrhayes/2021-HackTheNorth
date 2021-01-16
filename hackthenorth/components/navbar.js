@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -115,7 +116,10 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link href='/pages/SignIn'>
+        <MenuItem>Profile</MenuItem>
+      </Link>
+      
       <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
     </Menu>
   );
@@ -132,16 +136,16 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton aria-label="show new mails" color="inherit">
+          <Badge badgeContent={0} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton aria-label="show new notifications" color="inherit">
+          <Badge badgeContent={0} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -173,8 +177,13 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            ShareFood
+          <Typography 
+            className={classes.title} 
+            variant="h6" 
+            noWrap>
+            <Link href="/">
+              ShareFood
+            </Link>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
