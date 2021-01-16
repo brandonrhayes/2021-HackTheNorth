@@ -10,7 +10,7 @@ export default function Home() {
         <div className={styles.nav}>
             <Nav> </Nav> 
         </div>
-
+        
         <div className={styles.container}>
         <Head>
             <title>ShareFood</title>
@@ -39,7 +39,7 @@ export default function Home() {
                 </a>
             </Link>
 
-            <a href="/SignIn" className={styles.card}>
+            <a href="/facebookLogin" className={styles.card}>
                 <h3>SignIn &rarr;</h3>
                 <p>Learn about Next.js in an interactive course with quizzes!</p>
             </a>

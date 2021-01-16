@@ -116,7 +116,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link href='/pages/SignIn'>
+      <Link href='/SignIn'>
         <MenuItem>Profile</MenuItem>
       </Link>
       
