@@ -27,9 +27,11 @@
 
 .footer img {
   margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .footer a {
+  margin: .1rem;
   display: flex;
   justify-content: center;
   align-items: center;
