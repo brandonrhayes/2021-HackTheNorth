@@ -24,13 +24,12 @@ var config = {
 //- update student
 //- delete student
 //- update sponsor click count (add field/count to both student and sponsor count)
-//- toggle show sponsor data (boolean)
 //- update foodCard data
 
 // Create a pool.
 var pool = new pg.Pool(config);
 
-function insertSponsor(id, fname, lname, org) {
+function insertSponsor(sponsorid, fname, lname, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -39,14 +38,14 @@ function insertSponsor(id, fname, lname, org) {
     }
 
     var q =
-      "INSERT INTO sponsors (sponsorid, fname, lname, org) VALUES (" +
-      id +
+      "INSERT INTO sponsors (sponsorid, fname, lname, email_address) VALUES (" +
+      sponsorid +
       ",'" +
       fname +
       "','" +
       lname +
       "','" +
-      org +
+      email_address +
       "')";
 
     console.log(q);
@@ -56,7 +55,7 @@ function insertSponsor(id, fname, lname, org) {
   });
 }
 
-function updateSponsor(id, fname, lname, org) {
+function updateSponsor(id, fname, lname, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -79,10 +78,14 @@ function updateSponsor(id, fname, lname, org) {
             next
           );
         },
+
         function (results, next) {
           // Print out sponsors list.
           client.query(
-            "UPDATE sponsors SET org = '" + org + "' WHERE sponsorid=" + id,
+            "UPDATE sponsors SET email_address = '" +
+              email_address +
+              "' WHERE sponsorid=" +
+              id,
             next
           );
         },
@@ -125,17 +128,19 @@ function retrieveSponsor(id) {
       done();
     }
 
-    var q = "select fname, lname, org from sponsors where sponsorid=" + id;
+    var q =
+      "select fname, lname, email_address from sponsors where sponsorid=" + id;
 
     console.log(q);
-    client.query(q);
+    client.query(q).then(function (result) {
+      return result["rows"][0];
+    });
 
     done();
-    return()
   });
 }
 
-function insertStudent(id, name, country) {
+function insertStudent(id, name, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -144,12 +149,12 @@ function insertStudent(id, name, country) {
     }
 
     var q =
-      "INSERT INTO student (studentid, name, country) VALUES (" +
+      "INSERT INTO student (studentid, name, email_address) VALUES (" +
       id +
       ",'" +
       name +
       "','" +
-      country +
+      email_address +
       "')";
 
     console.log(q);
@@ -159,7 +164,7 @@ function insertStudent(id, name, country) {
   });
 }
 
-function updateStudent(id, name, country) {
+function updateStudent(id, name, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -178,8 +183,8 @@ function updateStudent(id, name, country) {
         function (results, next) {
           // Insert rows into the 'students' table.
           client.query(
-            "UPDATE students SET country = '" +
-              country +
+            "UPDATE students SET email_address = '" +
+              email_address +
               "' WHERE studentid=" +
               id,
             next
@@ -215,7 +220,5 @@ function deleteStudent(id) {
     done();
   });
 }
-
-deleteSponsor(156);
 
 // console.log(result);
