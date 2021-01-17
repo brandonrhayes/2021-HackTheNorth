@@ -13,6 +13,8 @@ Kevin
 
 ### Backend
 
+Due to challenges with CockroachDB, our backend is not functional. Please only run the frontend!
+
 Our server folder serves the backend, so change into that folder using `cd server`.
 
 Run `npm install` to install necessary modules.

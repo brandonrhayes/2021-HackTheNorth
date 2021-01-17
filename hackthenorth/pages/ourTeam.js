@@ -62,7 +62,7 @@ export default function Home() {
                             rel="noopener noreferrer"
                         >
                         <LinkedIn />
-                        <em>Adam Liu</em>
+                        <em>Adams Liu</em>
                         </a>
                     </div>
                 </div>
