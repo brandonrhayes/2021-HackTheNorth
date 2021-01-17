@@ -221,4 +221,32 @@ function deleteStudent(id) {
   });
 }
 
+function addClaimed(foodId) {
+  pool.connect(function (err, client, done) {
+    //checks for errors
+    if (err) {
+      console.error("could not connect to cockroachdb", err);
+      done();
+    }
+
+    var q =
+      "INSERT INTO sponsors (sponsorid, fname, lname, email_address) VALUES (" +
+      sponsorid +
+      ",'" +
+      fname +
+      "','" +
+      lname +
+      "','" +
+      email_address +
+      "')";
+
+    console.log(q);
+    client.query(q);
+    console.log("YOOYOYO");
+    done();
+  });
+}
+function removeClaimed(foodId) {}
+
+// insertSponsor(78, "Jennie", "Felix", "jennie.felix@gmail.com");
 // console.log(result);
