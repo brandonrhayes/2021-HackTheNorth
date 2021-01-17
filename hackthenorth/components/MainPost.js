@@ -1,11 +1,35 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Box from "@material-ui/core/Box";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+
 const useStyles = makeStyles((theme) => ({
+  inputRoot: {
+    marginTop: "5px",
+    width: "600px",
+    color: "white",
+    fontFamily: "Roboto",
+    fontSize: "50px",
+    backgroundColor: "rgba(150, 150, 150, 0.3)",
+
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderWidth: "2px",
+      borderColor: "black",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      borderWidth: "2px",
+      borderColor: "black",
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      borderWidth: "2px",
+      borderColor: "black",
+    },
+  },
   mainFeaturedPost: {
     position: "relative",
     backgroundColor: theme.palette.grey[1000],
@@ -15,12 +39,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-  },
-  searchMenu: {
-    padding: "0 4rem",
-  },
-  searchBar: {
-    backgroundColor: "white",
   },
   overlay: {
     position: "absolute",
@@ -66,14 +84,29 @@ const MainPost = () => {
           Meals near:
         </Typography>
         <Autocomplete
-          className={classes.searchMenu}
-          {...defaultProps}
-          id="select-on-focus"
-          style={{ width: 600 }}
-          selectOnFocus
-          renderInput={(params) => (
-            <TextField {...params} label="University" margin="normal" />
-          )}
+          id="combo-box-demo"
+          classes={classes}
+          options={schools}
+          disableClearable
+          forcePopupIcon={false}
+          getOptionLabel={(option) => option.title}
+          renderInput={(params) => {
+            return (
+              <TextField
+                style={{ padding: "0 2rem" }}
+                {...params}
+                fullWidth
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            );
+          }}
         />
       </Box>
     </Paper>

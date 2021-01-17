@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -11,7 +10,6 @@ import MainPost from "../../components/MainPost";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
-    // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: "2rem",
     margin: "2rem",
   },
@@ -22,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const featuredPosts = [
   {
+    id: 1,
     title: "Shrimp Curry",
     sponsor_name: "Mrs. Smith",
     date: "Jan 16, 7:30PM ",
