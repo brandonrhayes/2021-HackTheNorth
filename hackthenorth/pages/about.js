@@ -25,9 +25,9 @@ export default function Home() {
 
                 <div className={layout.container}>
                     <p className={styles.description}>
-                    We're an online community commited to helping individuals connect
+                    We're an online community committed to helping individuals connect
                     to find and share food.  We know that preparing meals during the school year
-                    can be challenging, and so do our partner familes.  Don't let stress and the 
+                    can be challenging, and so do our partner families.  Don't let stress and the 
                     pandemic let you feel insecure about the food you're eating. Connect with a
                     meal provider today to get quick access to nutritious meals for free!
                     </p>
