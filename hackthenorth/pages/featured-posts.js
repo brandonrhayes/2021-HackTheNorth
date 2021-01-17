@@ -52,7 +52,7 @@ const featuredPosts = [
     quantity: 4,
     dish_img_url: "/images/dish3.jpg",
     description:
-      "Accidently bought too many burgers, need to make them all before the go bad! ",
+      "This is a healthly meal with excellent nutritional value! You won't be dissapointed! ",
   },
   {
     title: "Mom's Spaghetti",
@@ -63,7 +63,7 @@ const featuredPosts = [
     quantity: 4,
     dish_img_url: "/images/dish4.jpg",
     description:
-      "Accidently bought too many burgers, need to make them all before the go bad! ",
+      "Look, if you had one shot, or one opportunity, I would recommend Mom's Spaghetti!",
   },
 ];
 
