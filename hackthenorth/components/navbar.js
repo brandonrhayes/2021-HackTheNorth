@@ -128,21 +128,21 @@ export default function PrimarySearchAppBar() {
       {!session && 
         <> 
           <Link href='/SignIn'>
-            <MenuItem>Profile</MenuItem>
+            <MenuItem>Sign into profile</MenuItem>
           </Link>
           <Link href='/SignIn'>
-              <MenuItem>My Account</MenuItem>
+              <MenuItem>Account details</MenuItem>
             </Link>
         </>
         }
         {session && 
           <>
             <Link href='/SignIn'>
-              <MenuItem>Profile</MenuItem>
+              <MenuItem>Sign Out</MenuItem>
             </Link>
 
             <Link href='/accountPage'>
-              <MenuItem>My Account</MenuItem>
+              <MenuItem>{session.user.name.split(" ", 1)}'s' account</MenuItem>
             </Link>
           </>
         }

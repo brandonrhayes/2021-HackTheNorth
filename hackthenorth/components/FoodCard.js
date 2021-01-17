@@ -10,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import { useSession } from 'next-auth/client'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -59,6 +60,7 @@ const FoodCard = ({ post }) => {
       post.claimed = post.claimed - 1;
     }
   }, [isClaimed]);
+
   return (
     <Grid item key={post.title} xs={12} md={6}>
       <CardActionArea component="a" href="#">
