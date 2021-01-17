@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import layout from '../styles/Layout.module.css'
 import Nav from '../components/navbar'
+import LinkedIn from '@material-ui/icons/LinkedIn';
 
 export default function Home() {
 
@@ -24,9 +25,46 @@ export default function Home() {
                 </h1>  
                 
                 <div className={layout.container}>
-                    <p className={styles.description}>
-                    Our Team.
-                    </p>
+                    <div className={styles.sidebyside}>
+                        <a
+                            href="https://www.linkedin.com/in/chankevin234/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                        <LinkedIn />
+                        <em>Kevin Chan</em>
+                        </a>
+                    </div>
+                    <div className={styles.sidebyside}>
+                        <a
+                            href="https://www.linkedin.com/in/brandonrhayes/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                        <LinkedIn />
+                        <em>Brandon Hayes</em>
+                        </a>
+                    </div>
+                    <div className={styles.sidebyside}>
+                        <a
+                            href="https://www.linkedin.com/in/Edmund-Lui98/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                        <LinkedIn />
+                        <em>Edmund Lui</em>
+                        </a>
+                    </div>
+                    <div className={styles.sidebyside}>
+                        <a
+                            href="https://www.linkedin.com/in/adams-liu/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                        <LinkedIn />
+                        <em>Adam Liu</em>
+                        </a>
+                    </div>
                 </div>
 
             </main>

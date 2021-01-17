@@ -22,8 +22,6 @@ export default function Home() {
                 <link rel="icon" href="/bake.png" />
             </Head>
 
-            <Header />
-
             <main className={styles.main}>
                 {loading && <div className={styles.title}>Loading...</div>}
                 {session && 

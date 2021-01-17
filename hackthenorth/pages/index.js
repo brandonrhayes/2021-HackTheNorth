@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 import layout from '../styles/Layout.module.css'
 import Link from 'next/link'
 import Nav from '../components/navbar'
-import Header from '../components/Header'
 import { useSession } from 'next-auth/client'
 
 export default function Home() {
@@ -49,37 +48,42 @@ export default function Home() {
                 </div>
 
                 <div className={styles.grid}>
-                <Link href="/posts/featured-posts">
-                    <a className={styles.card}>
-                    <h3>Featured Meals &rarr;</h3>
-                    <p>Checkout today's featured meals by our favourite contributors.</p>
+                    <Link href="/posts/featured-posts">
+                        <a className={styles.card}>
+                        <h3>Featured Meals &rarr;</h3>
+                        <p>Checkout today's featured meals by our favourite contributors.</p>
+                        </a>
+                    </Link>
+
+                    <a href="/about" className={styles.card}>
+                        <h3>About Us &rarr;</h3>
+                        <p>Learn about ShareFood and our mission.</p>
                     </a>
-                </Link>
 
-                <a href="/about" className={styles.card}>
-                    <h3>About Us &rarr;</h3>
-                    <p>Learn about ShareFood and our mission.</p>
-                </a>
+                    <a
+                        href="/ourTeam"
+                        className={styles.card}
+                    >
+                        <h3>Our Team &rarr;</h3>
+                        <p>Learn more about our team of developers.</p>
+                    </a>
 
-                <a
-                    href="/ourTeam"
-                    className={styles.card}
-                >
-                    <h3>Our Team &rarr;</h3>
-                    <p>Learn more about our team of developers.</p>
-                </a>
-
-                <a
-                    href="https://github.com/brandonrhayes/2021-HackTheNorth"
-                    className={styles.card}
-                >
-                    <h3>Our Github &rarr;</h3>
-                    <p>
-                        Checkout the code that makes our mission possible.
-                    </p>
-                </a>
+                    <a
+                        href="https://github.com/brandonrhayes/2021-HackTheNorth"
+                        className={styles.card}
+                    >
+                        <h3>Our Github &rarr;</h3>
+                        <p>
+                            Checkout the code that makes our mission possible.
+                        </p>
+                    </a>
                 </div>
 
+                <div className={layout.container}>
+                    <img src='bake512.png'></img>
+                    <h1 className={styles.title}> <em> Let's share food. </em></h1>
+                </div>
+                
             </main>
 
             <footer className={styles.footer}>
