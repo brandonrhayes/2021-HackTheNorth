@@ -4,16 +4,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Link from 'next/link'
+import { useSession } from 'next-auth/client'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -26,6 +22,18 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+    },
+  },
+  sidebyside: {  
+    padding: '0 0.5rem',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    verticalAlign: 'center',
+      '&:hover': {
+        cursor: "pointer",
+        backgroundColor: fade(theme.palette.common.white, 0.05),
     },
   },
   search: {
@@ -81,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const [session] = useSession();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -115,8 +124,30 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      
+      {!session && 
+        <> 
+          <Link href='/SignIn'>
+            <MenuItem>Profile</MenuItem>
+          </Link>
+          <Link href='/SignIn'>
+              <MenuItem>My Account</MenuItem>
+            </Link>
+        </>
+        }
+        {session && 
+          <>
+            <Link href='/SignIn'>
+              <MenuItem>Profile</MenuItem>
+            </Link>
+
+            <Link href='/accountPage'>
+              <MenuItem>My Account</MenuItem>
+            </Link>
+          </>
+        }
+        
+      
     </Menu>
   );
 
@@ -131,22 +162,6 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -154,7 +169,9 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
+        <div className={classes.sidebyside}>
           <AccountCircle />
+        </div>
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -163,7 +180,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor: "#0070f3"}}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -171,36 +188,20 @@ export default function PrimarySearchAppBar() {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+          <Typography 
+            className={classes.title} 
+            variant="h6" 
+            noWrap>
+            <Link href="/" >
+              <div className={classes.sidebyside}>
+                <img src='bake32.png'></img>
+                ShareFood
+              </div>
+            </Link>
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               edge="end"
               aria-label="account of current user"
