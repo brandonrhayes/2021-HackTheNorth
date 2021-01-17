@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import Nav from "../../components/navbar";
 import FoodCard from "../../components/FoodCard";
 import MainPost from "../../components/MainPost";
+// import { retrieveSponsor } from "../../server/db/connectDB";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -68,7 +69,11 @@ const featuredPosts = [
 
 const FeaturedPosts = () => {
   const classes = useStyles();
+  const [posts, setPosts] = useState([]);
 
+  // useEffect(() => {
+  //   console.log(retrieveSponsor(1));
+  // }, []);
   return (
     <>
       <Nav> </Nav>

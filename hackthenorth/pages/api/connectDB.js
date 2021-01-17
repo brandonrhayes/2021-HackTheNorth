@@ -55,7 +55,7 @@ function insertSponsor(sponsorid, fname, lname, email_address) {
   });
 }
 
-export function updateSponsor(id, fname, lname, email_address) {
+function updateSponsor(id, fname, lname, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -103,7 +103,7 @@ export function updateSponsor(id, fname, lname, email_address) {
     );
   });
 }
-export function deleteSponsor(id) {
+function deleteSponsor(id) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -120,7 +120,7 @@ export function deleteSponsor(id) {
   });
 }
 
-export function retrieveSponsor(id) {
+function retrieveSponsor(id) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -140,7 +140,7 @@ export function retrieveSponsor(id) {
   });
 }
 
-export function insertStudent(id, name, email_address) {
+function insertStudent(id, name, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -164,7 +164,7 @@ export function insertStudent(id, name, email_address) {
   });
 }
 
-export function updateStudent(id, name, email_address) {
+function updateStudent(id, name, email_address) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -204,7 +204,7 @@ export function updateStudent(id, name, email_address) {
     );
   });
 }
-export function deleteStudent(id) {
+function deleteStudent(id) {
   pool.connect(function (err, client, done) {
     //checks for errors
     if (err) {
@@ -220,3 +220,5 @@ export function deleteStudent(id) {
     done();
   });
 }
+
+// console.log(result);
