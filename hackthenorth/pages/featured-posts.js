@@ -4,15 +4,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Nav from "../../components/navbar";
-import FoodCard from "../../components/FoodCard";
-import MainPost from "../../components/MainPost";
-// import { retrieveSponsor } from "../../server/db/connectDB";
+import Nav from "../components/navbar";
+import FoodCard from "../components/FoodCard";
+import MainPost from "../components/MainPost";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     padding: "2rem",
-    margin: "2rem",
+    paddingTop: "0",
   },
   toolbarTitle: {
     flex: 1,
@@ -69,18 +69,14 @@ const featuredPosts = [
 
 const FeaturedPosts = () => {
   const classes = useStyles();
-  const [posts, setPosts] = useState([]);
 
-  // useEffect(() => {
-  //   console.log(retrieveSponsor(1));
-  // }, []);
   return (
     <>
       <Nav> </Nav>
 
       <Container maxWidth="lg">
         <Toolbar className={classes.toolbar}>
-          <Typography
+          {/* <Typography
             component="h2"
             variant="h5"
             color="inherit"
@@ -89,7 +85,7 @@ const FeaturedPosts = () => {
             className={classes.toolbarTitle}
           >
             Top Food Posts
-          </Typography>
+          </Typography> */}
         </Toolbar>
         <main>
           <MainPost />
@@ -103,6 +99,7 @@ const FeaturedPosts = () => {
           {/* End sub featured posts */}
         </main>
       </Container>
+      <Button>Hello</Button>
     </>
   );
 };

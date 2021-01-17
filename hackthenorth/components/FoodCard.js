@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -51,6 +51,14 @@ const FoodCard = ({ post }) => {
   const handleClaim = () => {
     setIsClaimed((isClaimed) => !isClaimed);
   };
+
+  useEffect(() => {
+    if (isClaimed == false) {
+      post.claimed = post.claimed + 1;
+    } else {
+      post.claimed = post.claimed - 1;
+    }
+  }, [isClaimed]);
   return (
     <Grid item key={post.title} xs={12} md={6}>
       <CardActionArea component="a" href="#">
