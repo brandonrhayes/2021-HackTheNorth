@@ -34,6 +34,9 @@ export default function Home() {
                         <h1 className={styles.title}>
                             Welcome to ShareFood!
                         </h1>
+                        <Link href="/SignIn">
+                            <a><em>It looks like you might be new here. Sign in here.</em></a>
+                        </Link>
                     </>
                 }
                 

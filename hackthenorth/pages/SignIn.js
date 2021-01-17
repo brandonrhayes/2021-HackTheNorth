@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
+import GitHub from '@material-ui/icons/GitHub';
+import Facebook from '@material-ui/icons/Facebook';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -36,6 +38,14 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  sidebyside: {  
+    padding: '0 0.5rem',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    verticalAlign: 'center',
   },
 }));
 
@@ -124,7 +134,10 @@ export default function SignIn() {
                             className={classes.submit}
                             onClick={(e) => handleSignin(e)}
                         >
-                            Sign In with GitHub
+                        <div className='sidebyside'></div>
+                            <GitHub></GitHub>
+                            <Facebook></Facebook>
+                            Sign In with another service
                         </Button>
                         
                         <Grid container>
