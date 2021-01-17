@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 import layout from '../styles/Layout.module.css'
 import Link from 'next/link'
 import Nav from '../components/navbar'
-import Header from '../components/Header'
 import { useSession } from 'next-auth/client'
 
 
