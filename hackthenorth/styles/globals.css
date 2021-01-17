@@ -14,3 +14,19 @@ a, Link {
 * {
   box-sizing: border-box;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  color: #fff;
+  padding: 0 2rem;
+  width: 100%;
+   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+              }
+              .logo {
+                font-weight: 800;
+                color: #000;
+                font-size: 1.8rem;
+}
