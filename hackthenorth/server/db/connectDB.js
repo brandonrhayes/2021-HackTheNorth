@@ -250,3 +250,6 @@ function removeClaimed(foodId) {}
 
 // insertSponsor(78, "Jennie", "Felix", "jennie.felix@gmail.com");
 // console.log(result);
+export default function handler(req, res) {
+  res.status(200).json({ text: "Hello" });
+}
