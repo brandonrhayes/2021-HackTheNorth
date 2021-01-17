@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import Copyright from '../components/copyright';
 import Nav from '../components/navbar'
 import styles from '../styles/Home.module.css'
+import { useSession, signIn, signOut } from 'next-auth/client'
 
 const useStyles = makeStyles((theme) => ({
     paper: {

@@ -6,6 +6,7 @@ import Nav from '../components/navbar'
 import Header from '../components/Header'
 import { useSession } from 'next-auth/client'
 
+
 export default function Home() {
     const [session, loading] = useSession();
 
@@ -21,12 +22,16 @@ export default function Home() {
                 <link rel="icon" href="/bake.png" />
             </Head>
 
+            <Header />
+
             <main className={styles.main}>
                 {loading && <div className={styles.title}>Loading...</div>}
                 {session && 
                     <> 
                         <h1 className={styles.title}>
-                            Welcome to ShareFood, {session.user.name.split(' ', 1) ?? session.user.email}.
+                            {session.user.name.split(' ', 1) ?? session.user.email}'s Settings
+                            <br></br>
+                            <img src={session.user.image} alt="Your profile picture." className={styles.avatar} />
                         </h1>
                     </>
                     }
@@ -40,42 +45,38 @@ export default function Home() {
                 
                 <div className={layout.container}>
                     <p className={styles.description}>
-                    We're an online community commited to helping individuals connect
-                    to find and share food.  We know that preparing meals during the school year
-                    can be challenging, and so do our partner familes.  Don't let stress and the 
-                    pandemic let you feel insecure about the food you're eating. Connect with a
-                    meal provider today to get quick access to nutritious meals for free!
+                        This is your profile page.
                     </p>
                 </div>
 
                 <div className={styles.grid}>
-                <Link href="/posts/featured-posts">
+                <Link href="/NotImplemented">
                     <a className={styles.card}>
-                    <h3>Featured Meals &rarr;</h3>
-                    <p>Checkout today's featured meals by our favourite contributors.</p>
+                    <h3>Favourite Meals &rarr;</h3>
+                    <p>Your favourite meals.</p>
                     </a>
                 </Link>
 
-                <a href="/about" className={styles.card}>
-                    <h3>About Us &rarr;</h3>
-                    <p>Learn about ShareFood and our mission.</p>
+                <a href="/NotImplemented" className={styles.card}>
+                    <h3>Order History &rarr;</h3>
+                    <p>Your previous orders.</p>
                 </a>
 
                 <a
-                    href="/ourTeam"
+                    href="/NotImplemented"
                     className={styles.card}
                 >
-                    <h3>Our Team &rarr;</h3>
-                    <p>Learn more about our team of developers.</p>
+                    <h3>Friends &rarr;</h3>
+                    <p>View your friend list.</p>
                 </a>
 
                 <a
-                    href="https://github.com/brandonrhayes/2021-HackTheNorth"
+                    href="/NotImplemented"
                     className={styles.card}
                 >
-                    <h3>Our Github &rarr;</h3>
+                    <h3>Settings &rarr;</h3>
                     <p>
-                        Checkout the code that makes our mission possible.
+                    Account settings.
                     </p>
                 </a>
                 </div>

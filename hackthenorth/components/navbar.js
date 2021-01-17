@@ -119,8 +119,10 @@ export default function PrimarySearchAppBar() {
       <Link href='/SignIn'>
         <MenuItem>Profile</MenuItem>
       </Link>
-      
-      <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
+
+      <Link href='/accountPage'>
+        <MenuItem>My Account</MenuItem>
+      </Link>
     </Menu>
   );
 

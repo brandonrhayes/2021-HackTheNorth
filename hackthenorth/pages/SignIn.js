@@ -9,12 +9,15 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from '../components/copyright';
 import Nav from '../components/navbar'
 import styles from '../styles/Home.module.css'
+import { useSession, signIn, signOut } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,79 +40,143 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-  const classes = useStyles();
+    const classes = useStyles();
+    const router = useRouter()
+    const [session] = useSession();
 
-  return (
-    <>
-        <div className={styles.nav}>
-            <Nav> </Nav> 
-        </div>
-        <Container component="main" maxWidth="xs">
-        
-        <CssBaseline />
-        <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-            Sign In to ShareFood
-            </Typography>
-            <form className={classes.form} noValidate>
-            <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-            />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-            />
-            <FormControlLabel
-                control={<Checkbox value="remember" color="secondary"  />}
-                label="Remember me"
-            />
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                style={{backgroundColor: "#0070f3"}}
-                className={classes.submit}
-            >
-                Sign In
-            </Button>
+    const handleSignin = (e) => {
+        e.preventDefault();
+        signIn();
+        if (!session) {
+            return(router.push('/SignIn'));
+        } else if (session) {
+            return (router.push('/about')); 
+        }  
+    }    
 
-            <Grid container>
-                <Grid item xs>
-                <Link href="/NotImplemented" variant="body2">
-                    Forgot password?
-                </Link>
-                </Grid>
-                <Grid item>
-                <Link href="/SignUp" variant="body2">
-                    {"Don't have an account? Sign Up."}
-                </Link>
-                </Grid>
-            </Grid>
-            </form>
-        </div>
-        <Box mt={8}>
-            <Copyright />
-        </Box>
-        </Container>
-    </>
-  );
+    const handleSignout = (e) => {
+        e.preventDefault()
+        signOut()
+    }
+
+    return (
+        <>
+            <div className={styles.nav}>
+                        <Nav> </Nav> 
+            </div>
+
+            {!session &&
+                <>
+                    <Container component="main" maxWidth="xs">
+                    
+                    <CssBaseline />
+                    <div className={classes.paper}>
+                        <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                        Sign In to ShareFood
+                        </Typography>
+                        <form className={classes.form} noValidate>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="secondary"  />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            style={{backgroundColor: "#0070f3"}}
+                            className={classes.submit}
+                        >
+                            Sign In
+                        </Button>
+                        
+
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            style={{backgroundColor: "#0070f3", marginTop: "0em"}}
+                            className={classes.submit}
+                            onClick={(e) => handleSignin(e)}
+                        >
+                            Sign In with GitHub
+                        </Button>
+                        
+                        <Grid container>
+                            <Grid item xs>
+                            <Link href="/NotImplemented" variant="body2">
+                                Forgot password?
+                            </Link>
+                            </Grid>
+                            <Grid item>
+                            <Link href="/SignUp" variant="body2">
+                                {"Don't have an account? Sign Up."}
+                            </Link>
+                            </Grid>
+                        </Grid>
+                        </form>
+                    </div>
+                    <Box mt={8}>
+                        <Copyright />
+                    </Box>
+                    </Container>
+                </>
+            }
+            {session &&
+                <>
+                    <Container component="main" maxWidth="xs">
+                        
+                        <CssBaseline />
+                        <div className={classes.paper}>
+                            <Avatar className={classes.avatar}>
+                                <LockOpenOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5">
+                                Welcome to ShareFood, {session.user.name.split(' ', 1)}
+                            </Typography>
+
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                style={{backgroundColor: "#0070f3", marginTop: "0em"}}
+                                className={classes.submit}
+                                onClick={(e) => handleSignout(e)}
+                            >
+                                Sign Out with GitHub
+                            </Button>
+                        </div>
+                        <div className="footer">
+                            <Copyright />
+                        </div>
+                    </Container>
+                </>
+            }
+        </>
+    );
 }
